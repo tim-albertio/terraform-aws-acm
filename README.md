@@ -11,6 +11,11 @@ module "acm" {
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 3.0"
 
+  providers = {
+    aws.acm = aws,
+    aws.dns = aws
+  }
+
   domain_name  = "my-domain.com"
   zone_id      = "Z2ES7B9AZ6SHAE"
 
@@ -33,6 +38,11 @@ module "acm" {
 module "acm" {
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 3.0"
+
+  providers = {
+    aws.acm = aws,
+    aws.dns = aws
+  }
 
   domain_name = "weekly.tf"
   zone_id     = "b7d259641bf30b89887c943ffc9d2138"
@@ -66,7 +76,8 @@ module "acm" {
   source = "terraform-aws-modules/acm/aws"
 
   providers = {
-    aws = aws.us-east-1
+    aws.acm = aws.us-east-1,
+    aws.dns = aws
   }
 
   domain_name = "my-domain.com"
@@ -95,6 +106,11 @@ Sometimes you need to have a way to create ACM certificate conditionally but Ter
 ```hcl
 module "acm" {
   source = "terraform-aws-modules/acm/aws"
+
+  providers = {
+    aws.acm = aws,
+    aws.dns = aws
+  }
 
   create_certificate = false
   # ... omitted
@@ -129,7 +145,8 @@ module "acm" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.12.0 |
+| <a name="provider_aws.acm"></a> [aws.acm](#provider\_aws.acm) | >= 4.12.0 |
+| <a name="provider_aws.dns"></a> [aws.dns](#provider\_aws.dns) | >= 4.12.0 |
 
 ## Modules
 
